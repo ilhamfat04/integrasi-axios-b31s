@@ -1,6 +1,9 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { UserContext } from '../../context/userContext'
 import { useHistory } from "react-router-dom"
+import { Alert } from 'react-bootstrap'
+
+import { API } from '../../config/api'
 
 export default function Register() {
 
@@ -8,6 +11,15 @@ export default function Register() {
     document.title = 'DumbMerch | ' + title
 
     const [state, dispatch] = useContext(UserContext)
+
+    const [message, setMessage] = useState(null)
+    const [form,setForm] = useState({
+        name: '',
+        email: '',
+        password: ''
+    })
+
+    const { name, email, password } = form
 
     let history = useHistory()
 
@@ -27,18 +39,73 @@ export default function Register() {
         history.push("/complain-admin")
     }
 
+    const handleChange = (e) => {
+        setForm({
+            ...form,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    const handleSubmit = async (e) => {
+        try {
+            e.preventDefault()
+
+            const config = {
+                headers: {
+                    "Content-type": "application/json"
+                }
+            }
+
+            const body = JSON.stringify(form)
+
+            const response = await API.post('/register', body, config)
+
+            setMessage(response.data.status)
+            console.log(response.data.status)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
         <div className="d-flex justify-content-center">
             <div className="card-auth p-4">
-                <div style={{ fontSize: '36px', lineHeight: '49px', fontWeight: '700' }}>Register</div>
-                <div className="mt-5 form">
-                    <input placeholder="Name" className="px-3 py-2" />
-                    <input placeholder="Email" className="px-3 py-2 mt-3" />
-                    <input placeholder="Password" className="px-3 py-2 mt-3" />
-                </div>
-                <div className="d-grid gap-2 mt-5">
-                    <button onClick={login} className="btn btn-login">Register</button>
-                </div>
+                <div 
+                    style={{ fontSize: '36px', lineHeight: '49px', fontWeight: '700' }}
+                    className="mb-2">Register</div>
+                {message && 
+                    <Alert variant="success" className="py-1">
+                        {message}
+                    </Alert>
+                }
+                <form onSubmit={handleSubmit}>
+                    <div className="mt-3 form">
+                        <input 
+                            type="text" 
+                            placeholder="Name" 
+                            value={name} 
+                            name="name" 
+                            onChange={handleChange}
+                            className="px-3 py-2" />
+                        <input 
+                            type="email" 
+                            placeholder="Email" 
+                            value={email} 
+                            name="email" 
+                            onChange={handleChange}
+                            className="px-3 py-2 mt-3" />
+                        <input 
+                            type="password" 
+                            placeholder="Password" 
+                            value={password} 
+                            name="password" 
+                            onChange={handleChange}
+                            className="px-3 py-2 mt-3" />
+                    </div>
+                    <div className="d-grid gap-2 mt-5">
+                        <button type="submit" className="btn btn-login">Register</button>
+                    </div>
+                </form>
             </div>
         </div>
     )

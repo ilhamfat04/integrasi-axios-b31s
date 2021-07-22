@@ -11,7 +11,7 @@ const jwt = require("jsonwebtoken");
 exports.register = async (req, res) => {
   // our validation schema here
   const schema = Joi.object({
-    name: Joi.string().min(5).required(),
+    name: Joi.string().min(3).required(),
     email: Joi.string().email().min(6).required(),
     password: Joi.string().min(6).required(),
   });
@@ -37,6 +37,7 @@ exports.register = async (req, res) => {
       name: req.body.name,
       email: req.body.email,
       password: hashedPassword,
+      status: 'customer'
     });
 
     // generate token
