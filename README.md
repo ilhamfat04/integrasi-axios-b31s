@@ -6,7 +6,7 @@ A promise based HTTP client for the browser and Node.js
 
 Insert data to register account `client/src/components/auth/Register.js`
 
-Get API config
+Get API config :
 
 ```javascript
 import { API } from "../../config/api";
