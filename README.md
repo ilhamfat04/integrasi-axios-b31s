@@ -6,7 +6,13 @@ A promise based HTTP client for the browser and Node.js
 
 Insert data to register account `client/src/components/auth/Register.js`
 
-For example script :
+Get API config
+
+```javascript
+import { API } from "../../config/api";
+```
+
+Example script insert data with axios :
 
 ```javascript
 ...
