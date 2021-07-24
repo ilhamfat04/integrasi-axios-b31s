@@ -6,6 +6,8 @@ import { Alert } from "react-bootstrap";
 import { API } from "../../config/api";
 
 export default function Register() {
+  let history = useHistory();
+
   const title = "Register";
   document.title = "DumbMerch | " + title;
 
@@ -20,25 +22,6 @@ export default function Register() {
 
   const { name, email, password } = form;
 
-  let history = useHistory();
-
-  const login = () => {
-    dispatch({
-      type: "LOGIN_SUCCESS",
-      payload: {
-        id: 1,
-        name: "Admin",
-        email: "admin@mail.com",
-        phone: "011111111111",
-        gender: "Male",
-        address:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry",
-        status: "admin",
-      },
-    });
-    history.push("/complain-admin");
-  };
-
   const handleChange = (e) => {
     setForm({
       ...form,
@@ -50,31 +33,41 @@ export default function Register() {
     try {
       e.preventDefault();
 
+      // Configuration Content-type
       const config = {
         headers: {
           "Content-type": "application/json",
         },
       };
 
+      // Data body
       const body = JSON.stringify(form);
 
+      // Insert data user to database
       const response = await API.post("/register", body, config);
 
-      const alert = (
-        <Alert variant="success" className="py-1">
-          Success
-        </Alert>
-      );
-
-      setMessage(alert);
-      console.log(response.data.status);
+      // Notification
+      if (response.data.status == "success...") {
+        const alert = (
+          <Alert variant="success" className="py-1">
+            Success
+          </Alert>
+        );
+        setMessage(alert);
+      } else {
+        const alert = (
+          <Alert variant="danger" className="py-1">
+            Failed
+          </Alert>
+        );
+        setMessage(alert);
+      }
     } catch (error) {
       const alert = (
         <Alert variant="danger" className="py-1">
           Failed
         </Alert>
       );
-
       setMessage(alert);
       console.log(error);
     }

@@ -32,22 +32,28 @@ export default function Login() {
     try {
       e.preventDefault();
 
+      // Configuration
       const config = {
         headers: {
           "Content-type": "application/json",
         },
       };
 
+      // Data body
       const body = JSON.stringify(form);
 
+      // Insert data for login process
       const response = await API.post("/login", body, config);
 
+      // Checking process
       if (response?.status == 200) {
+        // Send data to useContext
         dispatch({
           type: "LOGIN_SUCCESS",
           payload: response.data.data,
         });
 
+        // Status check
         if (response.data.data.status == "admin") {
           history.push("/complain-admin");
         } else {
