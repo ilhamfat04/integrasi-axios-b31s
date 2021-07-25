@@ -341,3 +341,10 @@ textarea:focus {
   cursor: pointer;
   margin-top: 1rem;
 }
+
+.card-form-input {
+  background: rgba(210, 210, 210, 0.25);
+  border: 2px solid #bcbcbc;
+  box-sizing: border-box;
+  border-radius: 5px;
+}

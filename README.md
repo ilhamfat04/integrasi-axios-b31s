@@ -59,10 +59,6 @@ A promise based HTTP client for the browser and Node.js
 
   > File : `client/src/pages/AddProductAdmin.js`
 
-- Insert data for transaction (buy product)
-
-  > File : `client/src/pages/Product.js`
-
 * Check Auth for stay login if refresh page
 
   > File : `client/src/App.js`

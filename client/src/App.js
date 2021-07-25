@@ -32,7 +32,8 @@ function App() {
       history.push("/auth");
     } else {
       if (state.user.status == "admin") {
-        history.push("/complain-admin");
+        history.push("/add-category");
+        // history.push("/complain-admin");
       } else if (state.user.status == "customer") {
         history.push("/");
       }
