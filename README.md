@@ -57,6 +57,8 @@
 
 * Insert transaction (buy)
 
+  **This step after fetching product detail data**
+
   > File : `client/src/pages/DetailProduct.js`
 
   Get API config :
