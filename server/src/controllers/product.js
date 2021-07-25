@@ -44,32 +44,26 @@ exports.getProduct = async (req, res) => {
 
 exports.addProduct = async (req, res) => {
   try {
-    const { category: categoryName, ...data } = req.body;
+    let { categoryId } = req.body;
+    categoryId = categoryId.split(",");
 
-    const newProduct = await product.create({
-      ...data,
-      image: req.file.filename, // image that passed from middleware will in the req.file 
-      idUser: req.user.id, // got from authentication middleware
+    const data = {
+      name: req.body.name,
+      desc: req.body.desc,
+      price: req.body.price,
+      image: req.file.filename,
+      qty: req.body.qty,
+      idUser: req.user.id,
+    };
 
+    let newProduct = await product.create(data);
+
+    const productCategoryData = categoryId.map((item) => {
+      return { idProduct: newProduct.id, idCategory: parseInt(item) };
     });
-    const categoryData = await category.findOne({
-      where: {
-        name: categoryName,
-      },
-    });
 
-    if (categoryData) {
-      await productCategory.create({
-        idCategory: categoryData.id,
-        idProduct: newProduct.id,
-      });
-    } else {
-      const newCategory = await category.create({ name: categoryName });
-      await productCategory.create({
-        idCategory: newCategory.id,
-        idProduct: newProduct.id,
-      });
-    }
+    await productCategory.bulkCreate(productCategoryData);
+
     let productData = await product.findOne({
       where: {
         id: newProduct.id,
@@ -99,13 +93,13 @@ exports.addProduct = async (req, res) => {
         exclude: ["createdAt", "updatedAt", "idUser"],
       },
     });
-    productData = JSON.parse(JSON.stringify(productData))
+    productData = JSON.parse(JSON.stringify(productData));
 
     res.send({
       status: "success...",
       data: {
         ...productData,
-        image: 'http://localhost:5000/uploads/' + productData.image
+        image: process.env.PATH_FILE + productData.image,
       },
     });
   } catch (error) {

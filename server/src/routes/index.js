@@ -15,6 +15,7 @@ const {
   getTransactions,
   addTransaction,
 } = require("../controllers/transaction");
+const { getCategories, addCategory } = require("../controllers/category");
 const { register, login, checkAuth } = require("../controllers/auth");
 
 // Middleware
@@ -33,6 +34,9 @@ router.post("/product", auth, uploadFile("image"), addProduct);
 
 router.get("/transactions", getTransactions);
 router.post("/transaction", auth, addTransaction);
+
+router.get("/categories", getCategories);
+router.post("/category", addCategory);
 
 router.post("/register", register);
 router.post("/login", login);
