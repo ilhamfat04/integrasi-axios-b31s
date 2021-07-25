@@ -1,10 +1,10 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { Switch, Route, useHistory } from "react-router-dom";
 import { UserContext } from "./context/userContext";
 
 import Auth from "./pages/Auth";
-import Shop from "./pages/Shop";
 import Product from "./pages/Product";
+import DetailProduct from "./pages/DetailProduct";
 import Complain from "./pages/Complain";
 import Profile from "./pages/Profile";
 import ComplainAdmin from "./pages/ComplainAdmin";
@@ -25,16 +25,20 @@ if (localStorage.token) {
 function App() {
   let history = useHistory();
   const [state, dispatch] = useContext(UserContext);
-
+  console.clear();
+  console.log(state);
   useEffect(() => {
+    if (localStorage.token) {
+      setAuthToken(localStorage.token);
+    }
+
     // Redirect Auth
-    if (state.isLogin == false) {
+    if (state.isLogin === false) {
       history.push("/auth");
     } else {
-      if (state.user.status == "admin") {
-        history.push("/add-category");
-        // history.push("/complain-admin");
-      } else if (state.user.status == "customer") {
+      if (state.user.status === "admin") {
+        history.push("/product-admin");
+      } else if (state.user.status === "customer") {
         history.push("/");
       }
     }
@@ -72,9 +76,9 @@ function App() {
 
   return (
     <Switch>
-      <Route exact path="/" component={Shop} />
+      <Route exact path="/" component={Product} />
       <Route path="/auth" component={Auth} />
-      <Route path="/product/:id" component={Product} />
+      <Route path="/product/:id" component={DetailProduct} />
       <Route path="/complain" component={Complain} />
       <Route path="/profile" component={Profile} />
       <Route path="/complain-admin" component={ComplainAdmin} />

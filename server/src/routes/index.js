@@ -10,12 +10,17 @@ const {
   updateUser,
   deleteUser,
 } = require("../controllers/user");
-const { getProduct, addProduct } = require("../controllers/product");
+const {
+  getProducts,
+  getProduct,
+  addProduct,
+} = require("../controllers/product");
 const {
   getTransactions,
   addTransaction,
 } = require("../controllers/transaction");
 const { getCategories, addCategory } = require("../controllers/category");
+const { getProfile } = require("../controllers/profile");
 const { register, login, checkAuth } = require("../controllers/auth");
 
 // Middleware
@@ -29,10 +34,13 @@ router.get("/user/:id", getUser);
 router.patch("/user/:id", updateUser);
 router.delete("/user/:id", deleteUser);
 
-router.get("/products", getProduct);
+router.get("/profile", auth, getProfile);
+
+router.get("/products", auth, getProducts);
+router.get("/product/:id", auth, getProduct);
 router.post("/product", auth, uploadFile("image"), addProduct);
 
-router.get("/transactions", getTransactions);
+router.get("/transactions", auth, getTransactions);
 router.post("/transaction", auth, addTransaction);
 
 router.get("/categories", getCategories);

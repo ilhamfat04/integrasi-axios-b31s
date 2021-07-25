@@ -54,6 +54,11 @@ export default function Register() {
           </Alert>
         );
         setMessage(alert);
+        setForm({
+          name: "",
+          email: "",
+          password: "",
+        });
       } else {
         const alert = (
           <Alert variant="danger" className="py-1">

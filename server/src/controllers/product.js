@@ -1,8 +1,8 @@
 const { product, user, category, productCategory } = require("../../models");
 
-exports.getProduct = async (req, res) => {
+exports.getProducts = async (req, res) => {
   try {
-    const data = await product.findAll({
+    let data = await product.findAll({
       include: [
         {
           model: user,
@@ -28,6 +28,65 @@ exports.getProduct = async (req, res) => {
         exclude: ["createdAt", "updatedAt", "idUser"],
       },
     });
+
+    data = JSON.parse(JSON.stringify(data));
+
+    data = data.map((item) => {
+      return { ...item, image: process.env.PATH_FILE + item.image };
+    });
+
+    res.send({
+      status: "success...",
+      data,
+    });
+  } catch (error) {
+    console.log(error);
+    res.send({
+      status: "failed",
+      message: "Server Error",
+    });
+  }
+};
+
+exports.getProduct = async (req, res) => {
+  try {
+    const { id } = req.params;
+    let data = await product.findOne({
+      where: {
+        id,
+      },
+      include: [
+        {
+          model: user,
+          as: "user",
+          attributes: {
+            exclude: ["createdAt", "updatedAt", "password"],
+          },
+        },
+        {
+          model: category,
+          as: "categories",
+          through: {
+            model: productCategory,
+            as: "bridge",
+            attributes: [],
+          },
+          attributes: {
+            exclude: ["createdAt", "updatedAt"],
+          },
+        },
+      ],
+      attributes: {
+        exclude: ["createdAt", "updatedAt", "idUser"],
+      },
+    });
+
+    data = JSON.parse(JSON.stringify(data));
+
+    data = {
+      ...data,
+      image: process.env.PATH_FILE + data.image,
+    };
 
     res.send({
       status: "success...",

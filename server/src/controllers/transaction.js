@@ -1,66 +1,92 @@
-const { user, transaction, product } = require('../../models')
+const { user, transaction, product } = require("../../models");
 
 exports.getTransactions = async (req, res) => {
-    try {
+  try {
+    const idBuyer = req.user.id;
+    let data = await transaction.findAll({
+      where: {
+        idBuyer,
+      },
+      attributes: {
+        exclude: ["updatedAt", "idBuyer", "idSeller", "idProduct"],
+      },
+      include: [
+        {
+          model: product,
+          as: "product",
+          attributes: {
+            exclude: [
+              "createdAt",
+              "updatedAt",
+              "idUser",
+              "qty",
+              "price",
+              "desc",
+            ],
+          },
+        },
+        {
+          model: user,
+          as: "buyer",
+          attributes: {
+            exclude: ["createdAt", "updatedAt", "password", "status"],
+          },
+        },
+        {
+          model: user,
+          as: "seller",
+          attributes: {
+            exclude: ["createdAt", "updatedAt", "password", "status"],
+          },
+        },
+      ],
+    });
 
-        const data = await transaction.findAll({
-            attributes: {
-                exclude: ['createdAt', 'updatedAt', 'idBuyer', 'idSeller', 'idProduct']
-            },
-            include: [
-                {
-                    model: product,
-                    as: 'product',
-                    attributes: {
-                        exclude: ['createdAt', 'updatedAt', 'idUser', 'qty', 'price']
-                    }
-                },
-                {
-                    model: user,
-                    as: 'buyer',
-                    attributes: {
-                        exclude: ['createdAt', 'updatedAt', 'password', 'status']
-                    }
-                },
-                {
-                    model: user,
-                    as: 'seller',
-                    attributes: {
-                        exclude: ['createdAt', 'updatedAt', 'password', 'status']
-                    }
-                },
-            ]
-        })
+    data = JSON.parse(JSON.stringify(data));
 
-        res.send({
-            status: 'success',
-            data
-        })
-    } catch (error) {
-        console.log(error)
-        res.send({
-            status: 'failed',
-            message: 'Server Error'
-        })
-    }
-}
+    data = data.map((item) => {
+      return {
+        ...item,
+        product: {
+          ...item.product,
+          image: process.env.PATH_FILE + item.product.image,
+        },
+      };
+    });
+
+    res.send({
+      status: "success",
+      data,
+    });
+  } catch (error) {
+    console.log(error);
+    res.send({
+      status: "failed",
+      message: "Server Error",
+    });
+  }
+};
 
 exports.addTransaction = async (req, res) => {
-    try {
-        const data = req.body
+  try {
+    let data = req.body;
 
-        await transaction.create(data)
+    data = {
+      ...data,
+      idBuyer: req.user.id,
+    };
 
-        res.send({
-            status: 'success',
-            message: 'Add transaction finished'
-        })
+    await transaction.create(data);
 
-    } catch (error) {
-        console.log(error)
-        res.send({
-            status: 'failed',
-            message: 'Server Error'
-        })
-    }
-}
+    res.send({
+      status: "success",
+      message: "Add transaction finished",
+    });
+  } catch (error) {
+    console.log(error);
+    res.send({
+      status: "failed",
+      message: "Server Error",
+    });
+  }
+};

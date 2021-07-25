@@ -348,3 +348,11 @@ textarea:focus {
   box-sizing: border-box;
   border-radius: 5px;
 }
+
+.no-data-transaction {
+  background-color: #161616;
+  border-radius: 5px;
+  padding: 10px;
+  text-align: center;
+  color: rgb(163, 163, 163);
+}

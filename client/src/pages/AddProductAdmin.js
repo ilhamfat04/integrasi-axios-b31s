@@ -86,6 +86,8 @@ export default function AddProductAdmin() {
       formData.set("qty", form.qty);
       formData.set("categoryId", categoryId);
 
+      console.log(form);
+
       // Insert product data
       const response = await API.post("/product", formData, config);
       console.log(response);
