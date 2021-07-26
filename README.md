@@ -146,7 +146,7 @@
 
 - Update category data
 
-  > File : `client/src/pages/CategoryAdmin.js`
+  > File : `client/src/pages/UpdateCategoryAdmin.js`
 
   Get API config :
 
