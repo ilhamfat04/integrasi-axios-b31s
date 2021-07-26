@@ -14,12 +14,18 @@ const {
   getProducts,
   getProduct,
   addProduct,
+  updateProduct,
 } = require("../controllers/product");
 const {
   getTransactions,
   addTransaction,
 } = require("../controllers/transaction");
-const { getCategories, addCategory } = require("../controllers/category");
+const {
+  getCategories,
+  addCategory,
+  updateCategory,
+  getCategory,
+} = require("../controllers/category");
 const { getProfile } = require("../controllers/profile");
 const { register, login, checkAuth } = require("../controllers/auth");
 
@@ -39,12 +45,15 @@ router.get("/profile", auth, getProfile);
 router.get("/products", auth, getProducts);
 router.get("/product/:id", auth, getProduct);
 router.post("/product", auth, uploadFile("image"), addProduct);
+router.patch("/product/:id", auth, uploadFile("image"), updateProduct);
 
 router.get("/transactions", auth, getTransactions);
 router.post("/transaction", auth, addTransaction);
 
 router.get("/categories", getCategories);
+router.get("/category/:id", getCategory);
 router.post("/category", addCategory);
+router.patch("/category/:id", updateCategory);
 
 router.post("/register", register);
 router.post("/login", login);

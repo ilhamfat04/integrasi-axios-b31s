@@ -10,10 +10,10 @@ import Profile from "./pages/Profile";
 import ComplainAdmin from "./pages/ComplainAdmin";
 import CategoryAdmin from "./pages/CategoryAdmin";
 import ProductAdmin from "./pages/ProductAdmin";
-import EditCategoryAdmin from "./pages/EditCategoryAdmin";
+import UpdateCategoryAdmin from "./pages/UpdateCategoryAdmin";
 import AddCategoryAdmin from "./pages/AddCategoryAdmin";
 import AddProductAdmin from "./pages/AddProductAdmin";
-import EditProductAdmin from "./pages/EditProductAdmin";
+import UpdateProductAdmin from "./pages/UpdateProductAdmin";
 
 import { API, setAuthToken } from "./config/api";
 
@@ -83,11 +83,11 @@ function App() {
       <Route path="/profile" component={Profile} />
       <Route path="/complain-admin" component={ComplainAdmin} />
       <Route path="/category-admin" component={CategoryAdmin} />
-      <Route path="/edit-category/:id" component={EditCategoryAdmin} />
+      <Route path="/update-category/:id" component={UpdateCategoryAdmin} />
       <Route path="/add-category" component={AddCategoryAdmin} />
       <Route path="/product-admin" component={ProductAdmin} />
       <Route path="/add-product" component={AddProductAdmin} />
-      <Route path="/edit-product/:id" component={EditProductAdmin} />
+      <Route path="/update-product/:id" component={UpdateProductAdmin} />
     </Switch>
   );
 }

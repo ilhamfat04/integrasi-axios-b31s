@@ -50,8 +50,8 @@ export default function ProductAdmin() {
     history.push("/add-product");
   };
 
-  const handleEdit = (id) => {
-    history.push("/edit-product/" + id);
+  const handleUpdate = (id) => {
+    history.push("/update-product/" + id);
   };
 
   const handleDelete = (id) => {
@@ -140,7 +140,7 @@ export default function ProductAdmin() {
                       <td className="align-middle">
                         <Button
                           onClick={() => {
-                            handleEdit(item.id);
+                            handleUpdate(item.id);
                           }}
                           className="btn-sm btn-success me-2"
                           style={{ width: "135px" }}

@@ -169,3 +169,59 @@ exports.addProduct = async (req, res) => {
     });
   }
 };
+
+exports.updateProduct = async (req, res) => {
+  try {
+    const { id } = req.params;
+    let { categoryId } = req.body;
+    categoryId = await categoryId.split(",");
+
+    const data = {
+      name: req?.body?.name,
+      desc: req?.body.desc,
+      price: req?.body?.price,
+      image: req?.file?.filename,
+      qty: req?.body?.qty,
+      idUser: req?.user?.id,
+    };
+
+    await productCategory.destroy({
+      where: {
+        idProduct: id,
+      },
+    });
+
+    let productCategoryData = [];
+    if (categoryId != 0 && categoryId[0] != "") {
+      productCategoryData = categoryId.map((item) => {
+        return { idProduct: parseInt(id), idCategory: parseInt(item) };
+      });
+    }
+
+    if (productCategoryData.length != 0) {
+      await productCategory.bulkCreate(productCategoryData);
+    }
+
+    await product.update(data, {
+      where: {
+        id,
+      },
+    });
+
+    res.send({
+      status: "success",
+      data: {
+        id,
+        data,
+        productCategoryData,
+        image: req?.file?.filename,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+    res.send({
+      status: "failed",
+      message: "Server Error",
+    });
+  }
+};

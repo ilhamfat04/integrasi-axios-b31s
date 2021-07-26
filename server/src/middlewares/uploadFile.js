@@ -45,10 +45,10 @@ exports.uploadFile = (imageFile) => {
         return res.status(400).send(req.fileValidationError);
 
       // show an error if file doesn't provided in req
-      if (!req.file && !err)
-        return res.status(400).send({
-          message: "Please select files to upload",
-        });
+      // if (!req.file && !err)
+      //   return res.status(400).send({
+      //     message: "Please select files to upload",
+      //   });
 
       // show an error if it exceeds the max size
       if (err) {

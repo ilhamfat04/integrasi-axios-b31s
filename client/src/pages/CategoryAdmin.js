@@ -42,7 +42,7 @@ export default function CategoryAdmin() {
   const handleShow = () => setShow(true);
 
   const handleEdit = (id) => {
-    history.push(`edit-category/${id}`);
+    history.push(`update-category/${id}`);
   };
 
   const handleDelete = (id) => {
@@ -65,6 +65,8 @@ export default function CategoryAdmin() {
     history.push("/add-category");
   };
 
+  console.log(categories);
+
   return (
     <>
       <NavbarAdmin title={title} />
@@ -84,7 +86,7 @@ export default function CategoryAdmin() {
             </Button>
           </Col>
           <Col xs="12">
-            {category.length != 0 ? (
+            {categories.length != 0 ? (
               <Table striped hover size="lg" variant="dark">
                 <thead>
                   <tr>
