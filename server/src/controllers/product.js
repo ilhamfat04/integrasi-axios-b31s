@@ -225,3 +225,32 @@ exports.updateProduct = async (req, res) => {
     });
   }
 };
+
+exports.deleteProduct = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    await product.destroy({
+      where: {
+        id,
+      },
+    });
+
+    await productCategory.destroy({
+      where: {
+        idProduct: id,
+      },
+    });
+
+    res.send({
+      status: "success",
+      message: `Delete product id: ${id} finished`,
+    });
+  } catch (error) {
+    console.log(error);
+    res.send({
+      status: "failed",
+      message: "Server Error",
+    });
+  }
+};

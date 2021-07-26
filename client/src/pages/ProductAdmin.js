@@ -17,8 +17,20 @@ import { API } from "../config/api";
 export default function ProductAdmin() {
   let history = useHistory();
 
+  const title = "Product admin";
+  document.title = "DumbMerch | " + title;
+
   // Variabel for store product data
   const [products, setProducts] = useState([]);
+
+  // Variabel for delete product data
+  const [idDelete, setIdDelete] = useState(null);
+  const [confirmDelete, setConfirmDelete] = useState(null);
+
+  // Modal Confirm delete data
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   // Get product data from database
   const getProducts = async () => {
@@ -35,17 +47,6 @@ export default function ProductAdmin() {
     getProducts();
   }, []);
 
-  const [product, setProduct] = useState(dataProduct);
-  const [idDelete, setIdDelete] = useState(null);
-  const [confirmDelete, setConfirmDelete] = useState(null);
-
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
-  const title = "Product admin";
-  document.title = "DumbMerch | " + title;
-
   const addProduct = () => {
     history.push("/add-product");
   };
@@ -54,18 +55,28 @@ export default function ProductAdmin() {
     history.push("/update-product/" + id);
   };
 
+  // For get id product & show modal confirm delete data
   const handleDelete = (id) => {
     setIdDelete(id);
     handleShow();
   };
 
+  // If confirm is true, execute delete data
+  const deleteById = async (id) => {
+    try {
+      await API.delete(`/product/${id}`);
+      getProducts();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     if (confirmDelete) {
+      // Close modal confirm delete data
       handleClose();
-      console.log(idDelete);
-
-      setProduct(product.filter((item) => item.id != idDelete));
-
+      // execute delete data by id function
+      deleteById(idDelete);
       setConfirmDelete(null);
     }
   }, [confirmDelete]);

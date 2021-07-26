@@ -8,6 +8,7 @@ import DeleteData from "../components/modal/DeleteData";
 import dataCategory from "../fakeData/category";
 import imgEmpty from "../assets/empty.svg";
 
+// API config
 import { API } from "../config/api";
 
 export default function CategoryAdmin() {
@@ -16,7 +17,17 @@ export default function CategoryAdmin() {
   const title = "Category admin";
   document.title = "DumbMerch | " + title;
 
+  // Variabel for store category data
   const [categories, setCategories] = useState([]);
+
+  // Variabel for delete category data
+  const [idDelete, setIdDelete] = useState(null);
+  const [confirmDelete, setConfirmDelete] = useState(null);
+
+  // Modal Confirm delete data
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   // Fetching categories data from database
   const getCategories = async () => {
@@ -33,30 +44,32 @@ export default function CategoryAdmin() {
     getCategories();
   }, []);
 
-  const [category, setCategory] = useState(dataCategory);
-  const [idDelete, setIdDelete] = useState(null);
-  const [confirmDelete, setConfirmDelete] = useState(null);
-
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
   const handleEdit = (id) => {
     history.push(`update-category/${id}`);
   };
 
+  // For get id category & show modal confirm delete data
   const handleDelete = (id) => {
     setIdDelete(id);
     handleShow();
   };
 
+  // If confirm is true, execute delete data
+  const deleteById = async (id) => {
+    try {
+      await API.delete(`/category/${id}`);
+      getCategories();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     if (confirmDelete) {
+      // Close modal confirm delete data
       handleClose();
-      console.log(idDelete);
-
-      setCategory(category.filter((item) => item.id != idDelete));
-
+      // execute delete data by id function
+      deleteById(idDelete);
       setConfirmDelete(null);
     }
   }, [confirmDelete]);
@@ -64,8 +77,6 @@ export default function CategoryAdmin() {
   const addCategory = () => {
     history.push("/add-category");
   };
-
-  console.log(categories);
 
   return (
     <>

@@ -15,6 +15,7 @@ const {
   getProduct,
   addProduct,
   updateProduct,
+  deleteProduct,
 } = require("../controllers/product");
 const {
   getTransactions,
@@ -25,6 +26,7 @@ const {
   addCategory,
   updateCategory,
   getCategory,
+  deleteCategory,
 } = require("../controllers/category");
 const { getProfile } = require("../controllers/profile");
 const { register, login, checkAuth } = require("../controllers/auth");
@@ -37,7 +39,7 @@ const { uploadFile } = require("../middlewares/uploadFile");
 router.post("/user", addUsers);
 router.get("/users", getUsers);
 router.get("/user/:id", getUser);
-router.patch("/user/:id", updateUser);
+router.delete("/user/:id", updateUser);
 router.delete("/user/:id", deleteUser);
 
 router.get("/profile", auth, getProfile);
@@ -46,6 +48,7 @@ router.get("/products", auth, getProducts);
 router.get("/product/:id", auth, getProduct);
 router.post("/product", auth, uploadFile("image"), addProduct);
 router.patch("/product/:id", auth, uploadFile("image"), updateProduct);
+router.delete("/product/:id", auth, deleteProduct);
 
 router.get("/transactions", auth, getTransactions);
 router.post("/transaction", auth, addTransaction);
@@ -54,6 +57,7 @@ router.get("/categories", getCategories);
 router.get("/category/:id", getCategory);
 router.post("/category", addCategory);
 router.patch("/category/:id", updateCategory);
+router.delete("/category/:id", deleteCategory);
 
 router.post("/register", register);
 router.post("/login", login);
