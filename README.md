@@ -68,7 +68,7 @@
 
 - Delete category data
 
-  > File : `client/src/pages/UpdateCategoryAdmin.js`
+  > File : `client/src/pages/CategoryAdmin.js`
 
   Get API config :
 
