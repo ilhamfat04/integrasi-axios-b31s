@@ -3,7 +3,7 @@ import { UserContext } from "../../context/userContext";
 import { useHistory } from "react-router-dom";
 import { Alert } from "react-bootstrap";
 
-import { API } from "../../config/api";
+// Get API config here ...
 
 export default function Login() {
   let history = useHistory();
@@ -14,10 +14,8 @@ export default function Login() {
   const [state, dispatch] = useContext(UserContext);
 
   const [message, setMessage] = useState(null);
-  const [form, setForm] = useState({
-    email: "",
-    password: "",
-  });
+  
+  // Store data with useState here ...
 
   const { email, password } = form;
 
@@ -32,18 +30,12 @@ export default function Login() {
     try {
       e.preventDefault();
 
-      // Configuration
-      const config = {
-        headers: {
-          "Content-type": "application/json",
-        },
-      };
+      // Create Configuration Content-type here ...
+      // Content-type: application/json
 
-      // Data body
-      const body = JSON.stringify(form);
+      // Convert form data to string here ...
 
-      // Insert data for login process
-      const response = await API.post("/login", body, config);
+      // Insert data user for login process here ...
 
       // Checking process
       if (response?.status == 200) {

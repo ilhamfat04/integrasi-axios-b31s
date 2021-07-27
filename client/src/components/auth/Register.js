@@ -3,7 +3,7 @@ import { UserContext } from "../../context/userContext";
 import { useHistory } from "react-router-dom";
 import { Alert } from "react-bootstrap";
 
-import { API } from "../../config/api";
+// Get API config here ...
 
 export default function Register() {
   let history = useHistory();
@@ -14,11 +14,8 @@ export default function Register() {
   const [state, dispatch] = useContext(UserContext);
 
   const [message, setMessage] = useState(null);
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    password: "",
-  });
+
+  // Store data with useState here ...
 
   const { name, email, password } = form;
 
@@ -33,18 +30,12 @@ export default function Register() {
     try {
       e.preventDefault();
 
-      // Configuration Content-type
-      const config = {
-        headers: {
-          "Content-type": "application/json",
-        },
-      };
+      // Create Configuration Content-type here ...
+      // Content-type: application/json
+  
+      // Convert form data to string here ...
 
-      // Data body
-      const body = JSON.stringify(form);
-
-      // Insert data user to database
-      const response = await API.post("/register", body, config);
+      // Insert data user to database here ...
 
       // Notification
       if (response.data.status == "success...") {
