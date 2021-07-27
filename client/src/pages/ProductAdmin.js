@@ -11,8 +11,7 @@ import imgEmpty from "../assets/empty.svg";
 
 import dataProduct from "../fakeData/product";
 
-// API config
-import { API } from "../config/api";
+// Get API config here ...
 
 export default function ProductAdmin() {
   let history = useHistory();
@@ -23,14 +22,9 @@ export default function ProductAdmin() {
   // Variabel for store product data
   const [products, setProducts] = useState([]);
 
-  // Variabel for delete product data
-  const [idDelete, setIdDelete] = useState(null);
-  const [confirmDelete, setConfirmDelete] = useState(null);
+  // Create variabel for id product and confirm delete data with useState here ...
 
-  // Modal Confirm delete data
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  // Create init useState & function for handle show-hide modal confirm here ...
 
   // Get product data from database
   const getProducts = async () => {
@@ -55,31 +49,12 @@ export default function ProductAdmin() {
     history.push("/update-product/" + id);
   };
 
-  // For get id product & show modal confirm delete data
-  const handleDelete = (id) => {
-    setIdDelete(id);
-    handleShow();
-  };
+  // Create function handle get id product & show modal confirm delete data here ...
 
+  // Create function for handle delete product here ...
   // If confirm is true, execute delete data
-  const deleteById = async (id) => {
-    try {
-      await API.delete(`/product/${id}`);
-      getProducts();
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
-  useEffect(() => {
-    if (confirmDelete) {
-      // Close modal confirm delete data
-      handleClose();
-      // execute delete data by id function
-      deleteById(idDelete);
-      setConfirmDelete(null);
-    }
-  }, [confirmDelete]);
+  // Call function for handle close modal and execute delete data with useEffect here ...
 
   return (
     <>

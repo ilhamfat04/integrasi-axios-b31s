@@ -8,8 +8,7 @@ import DeleteData from "../components/modal/DeleteData";
 import dataCategory from "../fakeData/category";
 import imgEmpty from "../assets/empty.svg";
 
-// API config
-import { API } from "../config/api";
+// Get API config here ...
 
 export default function CategoryAdmin() {
   let history = useHistory();
@@ -20,14 +19,9 @@ export default function CategoryAdmin() {
   // Variabel for store category data
   const [categories, setCategories] = useState([]);
 
-  // Variabel for delete category data
-  const [idDelete, setIdDelete] = useState(null);
-  const [confirmDelete, setConfirmDelete] = useState(null);
+  // Create variabel for id category and confirm delete data with useState here ...
 
-  // Modal Confirm delete data
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  // Init useState & function for handle show-hide modal confirm here ...
 
   // Fetching categories data from database
   const getCategories = async () => {
@@ -48,31 +42,12 @@ export default function CategoryAdmin() {
     history.push(`update-category/${id}`);
   };
 
-  // For get id category & show modal confirm delete data
-  const handleDelete = (id) => {
-    setIdDelete(id);
-    handleShow();
-  };
+  // Create function handle get id category & show modal confirm delete data here ...
 
+  /// Create function for handle delete category here ...
   // If confirm is true, execute delete data
-  const deleteById = async (id) => {
-    try {
-      await API.delete(`/category/${id}`);
-      getCategories();
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
-  useEffect(() => {
-    if (confirmDelete) {
-      // Close modal confirm delete data
-      handleClose();
-      // execute delete data by id function
-      deleteById(idDelete);
-      setConfirmDelete(null);
-    }
-  }, [confirmDelete]);
+  // Call function for handle close modal and execute delete data with useEffect here ...
 
   const addCategory = () => {
     history.push("/add-category");
