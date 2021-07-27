@@ -10,30 +10,17 @@ import ProductCard from "../components/card/ProductCard";
 
 import imgEmpty from "../assets/empty.svg";
 
-// API config
-import { API } from "../config/api";
+// Get API config here ...
 
 export default function Product() {
   const title = "Shop";
   document.title = "DumbMerch | " + title;
 
-  // Variabel for store product data
-  const [products, setProducts] = useState([]);
+  // Create Variabel for store product data here ...
 
-  // Get product data from database
-  const getProducts = async () => {
-    try {
-      const response = await API.get("/products");
-      // Store product data to useState variabel
-      setProducts(response.data.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // Create function get products data from database here ...
 
-  useEffect(() => {
-    getProducts();
-  }, []);
+  // Call function get products with useEffect didMount here ...
 
   const breakpointColumnsObj = {
     default: 6,

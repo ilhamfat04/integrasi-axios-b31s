@@ -12,7 +12,7 @@ import dataTransaction from "../fakeData/transaction";
 
 import imgBlank from "../assets/blank-profile.png";
 
-import { API } from "../config/api";
+// Get API config here ...
 
 export default function Profile() {
   const title = "Profile";
@@ -20,37 +20,14 @@ export default function Profile() {
 
   const [state] = useContext(UserContext);
 
-  const [profile, setProfile] = useState({});
-  const [transactions, setTransactions] = useState([]);
+  // Create Variabel for store profile data here ...
+  // Create Variabel for store transactions data here ...
 
-  // Fetching profile data from database
-  const getProfile = async () => {
-    try {
-      const response = await API.get("/profile");
-      // Store product data to useState variabel
-      setProfile(response.data.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // Create function get profile data by id from database here ...
+  // Create function get transactions data from database here ...
 
-  // Fetching transaction data from database
-  const getTransactions = async () => {
-    try {
-      const response = await API.get("/transactions");
-      // Store transaction data to useState variabel
-      setTransactions(response.data.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    getProfile();
-    getTransactions();
-  }, []);
-
-  console.log(transactions);
+  // Call function get product with useEffect didMount here ...
+  // Call function get transactions with useEffect didMount here ...
 
   return (
     <>

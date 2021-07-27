@@ -8,7 +8,7 @@ import DeleteData from "../components/modal/DeleteData";
 import dataCategory from "../fakeData/category";
 import imgEmpty from "../assets/empty.svg";
 
-import { API } from "../config/api";
+// Get API config here ...
 
 export default function CategoryAdmin() {
   let history = useHistory();
@@ -16,22 +16,11 @@ export default function CategoryAdmin() {
   const title = "Category admin";
   document.title = "DumbMerch | " + title;
 
-  const [categories, setCategories] = useState([]);
+  // Create Variabel for store categories data here ...
 
-  // Fetching categories data from database
-  const getCategories = async () => {
-    try {
-      const response = await API.get("/categories");
-      // Store categories data to useState variabel
-      setCategories(response.data.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // Create function get categories data by id from database here ...
 
-  useEffect(() => {
-    getCategories();
-  }, []);
+  // Call function get categories with useEffect didMount here ...
 
   const [category, setCategory] = useState(dataCategory);
   const [idDelete, setIdDelete] = useState(null);

@@ -7,58 +7,21 @@ import Navbar from "../components/Navbar";
 
 import dataProduct from "../fakeData/product";
 
-import { API } from "../config/api";
+// Get API config here ...
 
 export default function DetailProduct() {
   let history = useHistory();
   let { id } = useParams();
 
-  const [product, setProduct] = useState({});
+  // Create Variabel for store product data here ...
 
-  // Fetching detail product data by id from database
-  const getProduct = async (id) => {
-    try {
-      const response = await API.get("/product/" + id);
-      // Store product data to useState variabel
-      setProduct(response.data.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // Create function get product data by id from database here ...
 
-  useEffect(() => {
-    getProduct(id);
-  }, []);
+  // Call function get product with useEffect didMount here ...
 
-  const handleBuy = async (e) => {
-    try {
-      e.preventDefault();
-
-      // Configuration
-      const config = {
-        headers: {
-          "Content-type": "application/json",
-        },
-      };
-
-      // Get data from product
-      const data = {
-        idProduct: product.id,
-        idSeller: product.user.id,
-        price: product.price,
-      };
-
-      // Data body
-      const body = JSON.stringify(data);
-
-      // Insert transaction data
-      await API.post("/transaction", body, config);
-
-      history.push("/profile");
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  
+  // This step after fetching product detail data
+  // Create handle buy process & insert transaction data to database here ...
 
   return (
     <div>
