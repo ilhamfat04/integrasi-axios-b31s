@@ -6,7 +6,7 @@ import NavbarAdmin from "../components/NavbarAdmin";
 
 import dataCategory from "../fakeData/category";
 
-import { API } from "../config/api";
+// Get API config here ...
 
 export default function UpdateCategoryAdmin() {
   const title = "Category admin";
@@ -14,18 +14,12 @@ export default function UpdateCategoryAdmin() {
 
   let history = useHistory();
   const { id } = useParams();
-  const [category, setCategory] = useState({ name: "" });
 
-  // Fetching category data by id from database
-  const getCategory = async (id) => {
-    try {
-      const response = await API.get("/category/" + id);
-      // Store product data to useState variabel
-      setCategory({ name: response.data.data.name });
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // Create Variabel for store category data here ...
+
+  // Create function get category data by id from database here ...
+
+  // Call function get category data by id with useEffect didMount here ...
 
   const handleChange = (e) => {
     setCategory({
@@ -34,34 +28,7 @@ export default function UpdateCategoryAdmin() {
     });
   };
 
-  const handleSubmit = async (e) => {
-    try {
-      e.preventDefault();
-
-      // Configuration
-      const config = {
-        headers: {
-          "Content-type": "application/json",
-        },
-      };
-
-      // Data body
-      const body = JSON.stringify(category);
-
-      // Insert category data
-      const response = await API.patch("/category/" + id, body, config);
-
-      console.log(response.data);
-
-      history.push("/category-admin");
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    getCategory(id);
-  }, []);
+  // Create function for handle submit data ...
 
   return (
     <>
