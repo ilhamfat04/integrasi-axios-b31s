@@ -67,16 +67,12 @@ export default function ProductAdmin() {
             <div className="text-header-category mb-4">List Product</div>
           </Col>
           <Col xs="6" className="text-end">
-            <Button
-              onClick={addProduct}
-              className="btn-dark"
-              style={{ width: "100px" }}
-            >
+            <Button onClick={addProduct} className="btn-dark" style={{ width: "100px" }}>
               Add
             </Button>
           </Col>
           <Col xs="12">
-            {products.length != 0 ? (
+            {products.length !== 0 ? (
               <Table striped hover size="lg" variant="dark">
                 <thead>
                   <tr>
@@ -93,7 +89,7 @@ export default function ProductAdmin() {
                 </thead>
                 <tbody>
                   {products.map((item, index) => (
-                    <tr>
+                    <tr key={index}>
                       <td className="align-middle text-center">{index + 1}</td>
                       <td className="align-middle">
                         <img
@@ -103,6 +99,7 @@ export default function ProductAdmin() {
                             height: "80px",
                             objectFit: "cover",
                           }}
+                          alt={item.name}
                         />
                       </td>
                       <td className="align-middle">{item.name}</td>
@@ -120,9 +117,7 @@ export default function ProductAdmin() {
                           {item.desc}
                         </ShowMoreText>
                       </td>
-                      <td className="align-middle">
-                        {rupiahFormat.convert(item.price)}
-                      </td>
+                      <td className="align-middle">{rupiahFormat.convert(item.price)}</td>
                       <td className="align-middle">{item.qty}</td>
                       <td className="align-middle">
                         <Button
@@ -150,22 +145,14 @@ export default function ProductAdmin() {
               </Table>
             ) : (
               <div className="text-center pt-5">
-                <img
-                  src={imgEmpty}
-                  className="img-fluid"
-                  style={{ width: "40%" }}
-                />
+                <img src={imgEmpty} className="img-fluid" style={{ width: "40%" }} alt="empty" />
                 <div className="mt-3">No data product</div>
               </div>
             )}
           </Col>
         </Row>
       </Container>
-      <DeleteData
-        setConfirmDelete={setConfirmDelete}
-        show={show}
-        handleClose={handleClose}
-      />
+      <DeleteData setConfirmDelete={setConfirmDelete} show={show} handleClose={handleClose} />
     </>
   );
 }

@@ -38,10 +38,7 @@ export default function Profile() {
             <div className="text-header-product mb-4">My Profile</div>
             <Row>
               <Col md="6">
-                <img
-                  src={profile?.image ? profile.image : imgBlank}
-                  className="img-fluid rounded"
-                />
+                <img src={profile?.image ? profile.image : imgBlank} className="img-fluid rounded" alt="avatar" />
               </Col>
               <Col md="6">
                 <div className="profile-header">Name</div>
@@ -51,19 +48,13 @@ export default function Profile() {
                 <div className="profile-content">{state.user.email}</div>
 
                 <div className="profile-header">Phone</div>
-                <div className="profile-content">
-                  {profile?.phone ? profile?.phone : "-"}
-                </div>
+                <div className="profile-content">{profile?.phone ? profile?.phone : "-"}</div>
 
                 <div className="profile-header">Gender</div>
-                <div className="profile-content">
-                  {profile?.gender ? profile?.gender : "-"}
-                </div>
+                <div className="profile-content">{profile?.gender ? profile?.gender : "-"}</div>
 
                 <div className="profile-header">Address</div>
-                <div className="profile-content">
-                  {profile?.address ? profile?.address : "-"}
-                </div>
+                <div className="profile-content">{profile?.address ? profile?.address : "-"}</div>
               </Col>
             </Row>
           </Col>
@@ -131,12 +122,7 @@ export default function Profile() {
                           </div>
                         </Col>
                         <Col xs="3">
-                          <img
-                            src={imgDumbMerch}
-                            alt="img"
-                            className="img-fluid"
-                            style={{ maxHeight: "120px" }}
-                          />
+                          <img src={imgDumbMerch} alt="img" className="img-fluid" style={{ maxHeight: "120px" }} />
                         </Col>
                       </Row>
                     </Container>
