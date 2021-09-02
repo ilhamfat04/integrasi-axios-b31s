@@ -56,11 +56,7 @@ export default function CategoryAdmin() {
             <div className="text-header-category mb-4">List Category</div>
           </Col>
           <Col className="text-end">
-            <Button
-              onClick={addCategory}
-              className="btn-dark"
-              style={{ width: "100px" }}
-            >
+            <Button onClick={addCategory} className="btn-dark" style={{ width: "100px" }}>
               Add
             </Button>
           </Col>
@@ -109,22 +105,14 @@ export default function CategoryAdmin() {
               </Table>
             ) : (
               <div className="text-center pt-5">
-                <img
-                  src={imgEmpty}
-                  className="img-fluid"
-                  style={{ width: "40%" }}
-                />
+                <img src={imgEmpty} className="img-fluid" style={{ width: "40%" }} alt="empty" />
                 <div className="mt-3">No data category</div>
               </div>
             )}
           </Col>
         </Row>
       </Container>
-      <DeleteData
-        setConfirmDelete={setConfirmDelete}
-        show={show}
-        handleClose={handleClose}
-      />
+      <DeleteData setConfirmDelete={setConfirmDelete} show={show} handleClose={handleClose} />
     </>
   );
 }
