@@ -46,7 +46,7 @@ export default function Login() {
       const response = await API.post("/login", body, config);
 
       // Checking process
-      if (response?.status == 200) {
+      if (response?.status === 200) {
         // Send data to useContext
         dispatch({
           type: "LOGIN_SUCCESS",
@@ -54,7 +54,7 @@ export default function Login() {
         });
 
         // Status check
-        if (response.data.data.status == "admin") {
+        if (response.data.data.status === "admin") {
           history.push("/complain-admin");
         } else {
           history.push("/");
@@ -81,10 +81,7 @@ export default function Login() {
   return (
     <div className="d-flex justify-content-center">
       <div className="card-auth p-4">
-        <div
-          style={{ fontSize: "36px", lineHeight: "49px", fontWeight: "700" }}
-          className="mb-3"
-        >
+        <div style={{ fontSize: "36px", lineHeight: "49px", fontWeight: "700" }} className="mb-3">
           Login
         </div>
         {message && message}

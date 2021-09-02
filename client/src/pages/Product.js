@@ -52,24 +52,20 @@ export default function Product() {
           </Col>
         </Row>
         <Row className="my-4">
-          {products.length != 0 ? (
+          {products.length !== 0 ? (
             <Masonry
               breakpointCols={breakpointColumnsObj}
               className="my-masonry-grid"
               columnClassName="my-masonry-grid_column"
             >
               {products?.map((item, index) => (
-                <ProductCard item={item} index={index} />
+                <ProductCard item={item} key={index} />
               ))}
             </Masonry>
           ) : (
             <Col>
               <div className="text-center pt-5">
-                <img
-                  src={imgEmpty}
-                  className="img-fluid"
-                  style={{ width: "40%" }}
-                />
+                <img src={imgEmpty} className="img-fluid" style={{ width: "40%" }} alt="empty" />
                 <div className="mt-3">No data product</div>
               </div>
             </Col>

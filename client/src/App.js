@@ -33,7 +33,7 @@ function App() {
     }
 
     // Redirect Auth
-    if (state.isLogin === false) {
+    if (!state.isLogin) {
       history.push("/auth");
     } else {
       if (state.user.status === "admin") {

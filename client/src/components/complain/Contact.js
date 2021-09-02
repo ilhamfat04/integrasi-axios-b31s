@@ -8,16 +8,15 @@ export default function Contact({ dataContact, setContact, contact }) {
 
   return (
     <>
-      {dataContact.map((item) => (
+      {dataContact.map((item, index) => (
         <div
-          class={`contact mt-3 px-2 ${
-            contact?.id == item?.id && "contact-active"
-          }`}
+          key={index}
+          className={`contact mt-3 px-2 ${contact?.id == item?.id && "contact-active"}`}
           onClick={() => {
             clickContact(item.id);
           }}
         >
-          <img src={item.img} className="rounded-circle me-2 img-contact" />
+          <img src={item.img} className="rounded-circle me-2 img-contact" alt={item.img} />
           <div className="pt-2">
             <ul className="ps-0 text-contact">
               <li>{item.name}</li>
