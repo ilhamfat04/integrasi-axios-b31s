@@ -39,7 +39,7 @@ export default function AddProductAdmin() {
     const id = e.target.value;
     const checked = e.target.checked;
 
-    if (checked == true) {
+    if (checked) {
       // Save category id if checked
       setCategoryId([...categoryId, parseInt(id)]);
     } else {

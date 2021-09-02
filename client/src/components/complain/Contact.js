@@ -11,7 +11,7 @@ export default function Contact({ dataContact, setContact, contact }) {
       {dataContact.map((item, index) => (
         <div
           key={index}
-          class={`contact mt-3 px-2 ${contact?.id == item?.id && "contact-active"}`}
+          className={`contact mt-3 px-2 ${contact?.id == item?.id && "contact-active"}`}
           onClick={() => {
             clickContact(item.id);
           }}
