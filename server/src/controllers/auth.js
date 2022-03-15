@@ -13,7 +13,10 @@ exports.register = async (req, res) => {
   const schema = Joi.object({
     name: Joi.string().min(3).required(),
     email: Joi.string().email().min(6).required(),
-    password: Joi.string().min(6).required(),
+    password: Joi.string().min(6).required()
+      .messages({
+        'string.empty': "Password gak boleh kosong bos"
+      }),
   });
 
   // do validation and get error object from schema.validate
@@ -21,7 +24,7 @@ exports.register = async (req, res) => {
 
   // if error exist send validation error message
   if (error)
-    return res.status(400).send({
+    return res.status(200).send({
       error: {
         message: error.details[0].message,
       },

@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import { Alert } from "react-bootstrap";
 
 // Get API config here ...
+import { API } from '../../config/api'
 
 export default function Register() {
   let history = useHistory();
@@ -16,6 +17,11 @@ export default function Register() {
   const [message, setMessage] = useState(null);
 
   // Store data with useState here ...
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    password: ""
+  })
 
   const { name, email, password } = form;
 
@@ -32,10 +38,18 @@ export default function Register() {
 
       // Create Configuration Content-type here ...
       // Content-type: application/json
-  
+      const config = {
+        headers: {
+          "Content-type": "application/json"
+        }
+      }
+
       // Convert form data to string here ...
+      const body = JSON.stringify(form)
 
       // Insert data user to database here ...
+      const response = await API.post('/register', body, config)
+      console.log(response);
 
       // Notification
       if (response.data.status == "success...") {

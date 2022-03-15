@@ -52,6 +52,7 @@ export default function Auth() {
             </div>
           </Col>
           <Col md="6">{isRegister ? <Register /> : <Login />}</Col>
+          {/* <Col md="6">{<Register />}</Col> */}
         </Row>
       </Container>
     </div>
