@@ -173,8 +173,8 @@ exports.addProduct = async (req, res) => {
 exports.updateProduct = async (req, res) => {
   try {
     const { id } = req.params;
-    let { categoryId } = req.body;
-    categoryId = await categoryId.split(",");
+    // let { categoryId } = req.body;
+    // categoryId = await categoryId.split(",");
 
     const data = {
       name: req?.body?.name,
@@ -185,22 +185,22 @@ exports.updateProduct = async (req, res) => {
       idUser: req?.user?.id,
     };
 
-    await productCategory.destroy({
-      where: {
-        idProduct: id,
-      },
-    });
+    // await productCategory.destroy({
+    //   where: {
+    //     idProduct: id,
+    //   },
+    // });
 
-    let productCategoryData = [];
-    if (categoryId != 0 && categoryId[0] != "") {
-      productCategoryData = categoryId.map((item) => {
-        return { idProduct: parseInt(id), idCategory: parseInt(item) };
-      });
-    }
+    // let productCategoryData = [];
+    // if (categoryId != 0 && categoryId[0] != "") {
+    //   productCategoryData = categoryId.map((item) => {
+    //     return { idProduct: parseInt(id), idCategory: parseInt(item) };
+    //   });
+    // }
 
-    if (productCategoryData.length != 0) {
-      await productCategory.bulkCreate(productCategoryData);
-    }
+    // if (productCategoryData.length != 0) {
+    //   await productCategory.bulkCreate(productCategoryData);
+    // }
 
     await product.update(data, {
       where: {
@@ -213,7 +213,7 @@ exports.updateProduct = async (req, res) => {
       data: {
         id,
         data,
-        productCategoryData,
+        // productCategoryData,
         image: req?.file?.filename,
       },
     });
