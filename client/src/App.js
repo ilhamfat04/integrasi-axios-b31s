@@ -4,12 +4,12 @@ import { UserContext } from "./context/userContext";
 
 import Auth from "./pages/Auth";
 import Product from "./pages/Product";
-import DetailProduct from "./pages/DetailProduct";
+// import DetailProduct from "./pages/DetailProduct";
 import Complain from "./pages/Complain";
-import Profile from "./pages/Profile";
+// import Profile from "./pages/Profile";
 import ComplainAdmin from "./pages/ComplainAdmin";
-import CategoryAdmin from "./pages/CategoryAdmin";
-import ProductAdmin from "./pages/ProductAdmin";
+// import CategoryAdmin from "./pages/CategoryAdmin";
+// import ProductAdmin from "./pages/ProductAdmin";
 import EditCategoryAdmin from "./pages/EditCategoryAdmin";
 import AddCategoryAdmin from "./pages/AddCategoryAdmin";
 import AddProductAdmin from "./pages/AddProductAdmin";
@@ -78,14 +78,14 @@ function App() {
     <Switch>
       <Route exact path="/" component={Product} />
       <Route path="/auth" component={Auth} />
-      <Route path="/product/:id" component={DetailProduct} />
+      {/* <Route path="/product/:id" component={DetailProduct} /> */}
       <Route path="/complain" component={Complain} />
-      <Route path="/profile" component={Profile} />
+      {/* <Route path="/profile" component={Profile} /> */}
       <Route path="/complain-admin" component={ComplainAdmin} />
-      <Route path="/category-admin" component={CategoryAdmin} />
+      {/* <Route path="/category-admin" component={CategoryAdmin} /> */}
       <Route path="/edit-category/:id" component={EditCategoryAdmin} />
       <Route path="/add-category" component={AddCategoryAdmin} />
-      <Route path="/product-admin" component={ProductAdmin} />
+      {/* <Route path="/product-admin" component={ProductAdmin} /> */}
       <Route path="/add-product" component={AddProductAdmin} />
       <Route path="/edit-product/:id" component={EditProductAdmin} />
     </Switch>

@@ -11,16 +11,29 @@ import ProductCard from "../components/card/ProductCard";
 import imgEmpty from "../assets/empty.svg";
 
 // Get API config here ...
+import { API } from "../config/api";
 
 export default function Product() {
   const title = "Shop";
   document.title = "DumbMerch | " + title;
 
   // Create Variabel for store product data here ...
+  const [products, setProduct] = useState([])
 
   // Create function get products data from database here ...
+  const getroducts = async () => {
+    try {
+      const response = await API.get("/products")
+      setProduct(response.data.data)
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   // Call function get products with useEffect didMount here ...
+  useEffect(() => {
+    getroducts()
+  }, [])
 
   const breakpointColumnsObj = {
     default: 6,
